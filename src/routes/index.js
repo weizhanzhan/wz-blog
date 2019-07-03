@@ -8,6 +8,11 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: () => import('../views/Home')
+        },
+        {
+            path: '/blog/:id',
+            name: 'blog',
+            component: () => import('../views/Blog')
         }
     ],
     mode: 'history'

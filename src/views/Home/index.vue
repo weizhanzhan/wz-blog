@@ -26,7 +26,7 @@
                     </div>
                     <div
                       class="info-row-title"
-                      @click="app.RouterPush('/blog/'+blog._id)"
+                      @click="check(blog)"
                     >
                       {{ blog.title }}
                     </div>
@@ -91,6 +91,9 @@
       },
       changePage() {
         this.init()
+      },
+      check(blog) {
+        this.$router.push({ path: '/blog/' + blog._id })
       }
     }
   }
