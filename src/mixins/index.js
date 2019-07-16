@@ -2,7 +2,7 @@ export default {
     data() {
         return {
             vloading: false,
-            timer: null,
+            noTopTimer: null,
             scroll: false
         }
     },
@@ -18,16 +18,19 @@ export default {
         next()
     },
     mounted() {
-        window.onscroll = () => {
-            // 变量t是滚动条滚动时，距离顶部的距离
-            if (this.timer) {
-                clearTimeout(this.timer)
-            }
-            this.timer = setTimeout(() => { // 节流
-                var t = document.documentElement.scrollTop || document.body.scrollTop
-                this.scroll = t > 300
-            }, 100)
-        }
+   
+        // window.onscroll = () => {
+         
+        //     // 变量t是滚动条滚动时，距离顶部的距离
+        //     if (this.noTopTimer) {
+        //         clearTimeout(this.noTopTimer)
+        //     }
+        //     this.noTopTimer = setTimeout(() => { // 节流
+        //         console.log(12)
+        //         var t = document.documentElement.scrollTop || document.body.scrollTop
+        //         this.scroll = t > 300
+        //     }, 100)
+        // }
         this.init()
     }
 }

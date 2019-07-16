@@ -6,7 +6,7 @@
     <div class="info">
       <div>
         <img
-          src="../assets/img/me.jpg"
+          src="http://www.zhanwei.xyz/images/avatar.jpg"
           alt=""
         >
       </div>

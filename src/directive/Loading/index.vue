@@ -17,7 +17,7 @@
         width: 2.5em;
         height: 2.5em;
         transform: rotate(165deg);
-         margin: 0 auto
+        margin: 0 auto
     }
     .loader:before, .loader:after {
         content: '';
@@ -72,15 +72,15 @@
         }
         }
     .loading-wrapper {
-        position: absolute;
+        position: fixed;
         width: 100%;
         height: 100%;
         background: #ffffff;
         opacity: 0.8;
         top: 0;
         left: 0;
-        z-index: 10000;
-        padding-top: 100px
+        z-index: 10000;   
+        padding-top: 25%
     }
   /*
     .loading {

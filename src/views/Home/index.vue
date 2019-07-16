@@ -48,7 +48,7 @@
             </ul>
           </div>
         </div>
-        <!-- <Aside :no-header-top="noHeaderTop" /> -->
+        <Aside :no-header-top="noHeaderTop" />
       </div>
     </div>
   </div>
@@ -70,7 +70,6 @@
         totalCount: 0,
         count: 1,
         blogs: [],
-
         searchBlog: '',
         timer: null
       }
@@ -123,10 +122,22 @@
       }
 
       window.onscroll = () => {
+        
+      // 变量t是滚动条滚动时，距离顶部的距离
+        if (this.noTopTimer) {
+            clearTimeout(this.noTopTimer)
+        }
+        this.noTopTimer = setTimeout(() => { // 节流
+            console.log(12)
+            var t = document.documentElement.scrollTop || document.body.scrollTop
+            this.scroll = t > 300
+        }, 100)
+
+        
         if (this.timer) { clearTimeout(this.timer) }
         this.timer = setTimeout(() => {
           if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
-            // this.init()
+            this.init()
             console.log('已经到最底部了！!')
           }
         }, 250)
@@ -138,11 +149,11 @@
         this.vloading = true
         getBlogs(this.page, this.size)
           .then(res => {
-            console.log(res)
+           
             this.vloading = false
-            this.page++
-            this.blogs = res.data.blogs
+            this.blogs = this.blogs.concat(res.data.blogs)
             this.totalCount = res.data.count
+            if(res.data.blogs.length<=this.size) this.page ++ 
           })
       },
       changePage() {
