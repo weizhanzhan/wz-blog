@@ -65,12 +65,14 @@
     mixins: [initial],
     data() {
       return {
-        pageSize: 10,
-        currentPage: 1,
-        totalPage: 1,
+        size: 10,
+        page: 1,
+        totalCount: 0,
         count: 1,
         blogs: [],
-        searchBlog: ''
+
+        searchBlog: '',
+        timer: null
       }
     },
     computed: {
@@ -119,23 +121,28 @@
         }
         return windowHeight
       }
-      var _this = this
-      window.onscroll = function() {
-        if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
-          _this.pageSize += 10
-          _this.init()
-          console.log('已经到最底部了！!')
-        }
+
+      window.onscroll = () => {
+        if (this.timer) { clearTimeout(this.timer) }
+        this.timer = setTimeout(() => {
+          if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
+            // this.init()
+            console.log('已经到最底部了！!')
+          }
+        }, 250)
       }
     },
     methods: {
       init() {
+        if (this.vloading) return
         this.vloading = true
-        getBlogs(this.currentPage, this.pageSize)
+        getBlogs(this.page, this.size)
           .then(res => {
+            console.log(res)
             this.vloading = false
+            this.page++
             this.blogs = res.data.blogs
-            this.totalPage = res.data.count
+            this.totalCount = res.data.count
           })
       },
       changePage() {
