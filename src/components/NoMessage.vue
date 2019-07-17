@@ -11,9 +11,9 @@
 </script>
 
 <style>
-.no-message{
+.no-message {
   text-align: center;
   padding-top: 20px;
-  color: #dddddd
+  color: #dddddd;
 }
 </style>

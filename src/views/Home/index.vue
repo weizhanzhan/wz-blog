@@ -31,7 +31,8 @@
                       {{ blog.title }}
                     </div>
                     <div class="info-row-action">
-                      <span><i class="iconfont icon-icon-test" /> {{ blog.likes }}</span>
+                      <span>
+                        <i class="iconfont icon-icon-test" /> {{ blog.likes }}</span>
                       <span><i class="iconfont icon-pinglun2" /> {{ blog.comment.length }}</span>
                       <span><i class="iconfont icon-fenxiang" /></span>
                     </div>
@@ -63,6 +64,7 @@
   import { getScrollTop, getScrollHeight, getWindowHeight } from '../../utils/common'
   import { getBlogs } from '../../apis'
   export default {
+    name: 'Home',
     components: { Header, Aside, NoMessage },
     // inject:['app'],
     mixins: [initial],
@@ -82,27 +84,11 @@
         })
       }
     },
+    activated() {
+      this.listenerScroll()
+    },
     mounted() {
-      window.onscroll = () => {
-        // 变量t是滚动条滚动时，距离顶部的距离
-        if (this.noTopTimer) {
-          clearTimeout(this.noTopTimer)
-        }
-        this.noTopTimer = setTimeout(() => { // 节流
-          var t = document.documentElement.scrollTop || document.body.scrollTop
-          this.scroll = t > 300
-          clearTimeout(this.noTopTimer)
-        }, 100)
-
-        if (this.timer) { clearTimeout(this.timer) }
-        this.timer = setTimeout(() => {
-          if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
-            this.init()
-            clearTimeout(this.timer)
-            // console.log('已经到最底部了！!')
-          }
-        }, 250)
-      }
+      this.listenerScroll()
     },
     methods: {
       init() {
@@ -122,6 +108,27 @@
       },
       check(blog) {
         this.$router.push({ path: '/blog/' + blog._id })
+      },
+      listenerScroll() {
+        window.onscroll = () => {
+          // 变量t是滚动条滚动时，距离顶部的距离
+          if (this.noTopTimer) {
+            clearTimeout(this.noTopTimer)
+          }
+          this.noTopTimer = setTimeout(() => { // 节流
+            var t = document.documentElement.scrollTop || document.body.scrollTop
+            this.scroll = t > 300
+            clearTimeout(this.noTopTimer)
+          }, 100)
+
+          if (this.timer) { clearTimeout(this.timer) }
+          this.timer = setTimeout(() => {
+            if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
+              this.init()
+              clearTimeout(this.timer)
+            }
+          }, 250)
+        }
       }
     }
   }

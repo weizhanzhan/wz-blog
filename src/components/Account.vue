@@ -34,37 +34,37 @@
 </script>
 
 <style scoped>
-.account img{
-    width: 60px;
-    border-radius: 50%;
-    margin: 0 auto
+.account img {
+  width: 60px;
+  border-radius: 50%;
+  margin: 0 auto;
 }
-.about{
-    padding: 10px;
-    border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+.about {
+  padding: 10px;
+  border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
 }
-.info{
-    padding: 10px;
-    display: flex;
-    border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+.info {
+  padding: 10px;
+  display: flex;
+  border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
 }
-.name{
-    padding-left: 10px;
-    line-height: 32px;
+.name {
+  padding-left: 10px;
+  line-height: 32px;
 }
-.ename{
-    font-size: 18px;
-    font-weight: bold
+.ename {
+  font-size: 18px;
+  font-weight: bold;
 }
-.job{
-    color: #72777b
+.job {
+  color: #72777b;
 }
-.many{
+.many {
   display: flex;
   padding: 15px 0;
   justify-content: space-around;
 }
-.many i{
-  font-size: 20px
+.many i {
+  font-size: 20px;
 }
 </style>
