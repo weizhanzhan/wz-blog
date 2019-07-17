@@ -3,7 +3,10 @@ export default {
         return {
             vloading: false,
             noTopTimer: null,
-            scroll: false
+            scroll: false,
+            size: 10,
+            page: 1,
+            totalCount: 0
         }
     },
     computed: {
@@ -18,9 +21,8 @@ export default {
         next()
     },
     mounted() {
-   
         // window.onscroll = () => {
-         
+
         //     // 变量t是滚动条滚动时，距离顶部的距离
         //     if (this.noTopTimer) {
         //         clearTimeout(this.noTopTimer)

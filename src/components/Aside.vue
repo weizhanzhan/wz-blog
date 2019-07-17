@@ -7,17 +7,19 @@
       <div class="aside-item">
         <Account />
       </div>
-      <div class="aside-item" />
+      <div class="aside-item noback">
+        <Eyes />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
   import Account from './Account'
-
+  import Eyes from './Eyes'
   export default {
     components: {
-      Account
+      Account, Eyes
 
     },
     props: {

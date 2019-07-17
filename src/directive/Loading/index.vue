@@ -79,7 +79,7 @@
         opacity: 0.8;
         top: 0;
         left: 0;
-        z-index: 10000;   
+        z-index: 10000;
         padding-top: 25%
     }
   /*

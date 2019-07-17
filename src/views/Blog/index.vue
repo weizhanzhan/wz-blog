@@ -48,9 +48,21 @@
         })
       }
     },
+    mounted() {
+      window.onscroll = () => {
+        // 变量t是滚动条滚动时，距离顶部的距离
+        if (this.noTopTimer) {
+          clearTimeout(this.noTopTimer)
+        }
+        this.noTopTimer = setTimeout(() => { // 节流
+          var t = document.documentElement.scrollTop || document.body.scrollTop
+          this.scroll = t > 300
+          clearTimeout(this.noTopTimer)
+        }, 100)
+      }
+    },
     methods: {
       init() {
-        console.log()
         // this.vloading = true
         getDetail(this.$route.params.id)
           .then(res => {

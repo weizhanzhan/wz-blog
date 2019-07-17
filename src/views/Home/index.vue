@@ -47,6 +47,7 @@
               </li>
             </ul>
           </div>
+          <NoMessage v-if="blogCounts==0" />
         </div>
         <Aside :no-header-top="noHeaderTop" />
       </div>
@@ -55,21 +56,21 @@
 </template>
 
 <script>
-  import { getBlogs } from '../../apis'
   import Aside from '../../components/Aside'
   import initial from '../../mixins'
   import Header from '../../components/Header'
+  import NoMessage from '../../components/NoMessage'
+  import { getScrollTop, getScrollHeight, getWindowHeight } from '../../utils/common'
+  import { getBlogs } from '../../apis'
   export default {
-    components: { Header, Aside },
+    components: { Header, Aside, NoMessage },
     // inject:['app'],
     mixins: [initial],
     data() {
       return {
-        size: 10,
-        page: 1,
-        totalCount: 0,
         count: 1,
         blogs: [],
+        blogCounts: 0,
         searchBlog: '',
         timer: null
       }
@@ -82,63 +83,23 @@
       }
     },
     mounted() {
-      // 滚动条在Y轴上的滚动距离
-      function getScrollTop() {
-        var scrollTop = 0; var bodyScrollTop = 0; var documentScrollTop = 0
-        if (document.body) {
-          bodyScrollTop = document.body.scrollTop
-        }
-        if (document.documentElement) {
-          documentScrollTop = document.documentElement.scrollTop
-        }
-        scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop
-        return scrollTop
-      }
-
-      // 文档的总高度
-
-      function getScrollHeight() {
-        var scrollHeight = 0; var bodyScrollHeight = 0; var documentScrollHeight = 0
-        if (document.body) {
-          bodyScrollHeight = document.body.scrollHeight
-        }
-        if (document.documentElement) {
-          documentScrollHeight = document.documentElement.scrollHeight
-        }
-        scrollHeight = (bodyScrollHeight - documentScrollHeight > 0) ? bodyScrollHeight : documentScrollHeight
-        return scrollHeight
-      }
-
-      // 浏览器视口的高度
-
-      function getWindowHeight() {
-        var windowHeight = 0
-        if (document.compatMode === 'CSS1Compat') {
-          windowHeight = document.documentElement.clientHeight
-        } else {
-          windowHeight = document.body.clientHeight
-        }
-        return windowHeight
-      }
-
       window.onscroll = () => {
-        
-      // 变量t是滚动条滚动时，距离顶部的距离
+        // 变量t是滚动条滚动时，距离顶部的距离
         if (this.noTopTimer) {
-            clearTimeout(this.noTopTimer)
+          clearTimeout(this.noTopTimer)
         }
         this.noTopTimer = setTimeout(() => { // 节流
-            console.log(12)
-            var t = document.documentElement.scrollTop || document.body.scrollTop
-            this.scroll = t > 300
+          var t = document.documentElement.scrollTop || document.body.scrollTop
+          this.scroll = t > 300
+          clearTimeout(this.noTopTimer)
         }, 100)
 
-        
         if (this.timer) { clearTimeout(this.timer) }
         this.timer = setTimeout(() => {
           if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
             this.init()
-            console.log('已经到最底部了！!')
+            clearTimeout(this.timer)
+            // console.log('已经到最底部了！!')
           }
         }, 250)
       }
@@ -148,12 +109,12 @@
         if (this.vloading) return
         this.vloading = true
         getBlogs(this.page, this.size)
-          .then(res => {
-           
+          .then(({ data }) => {
             this.vloading = false
-            this.blogs = this.blogs.concat(res.data.blogs)
-            this.totalCount = res.data.count
-            if(res.data.blogs.length<=this.size) this.page ++ 
+            this.blogCounts = data.blogs.length
+            this.blogs = this.blogs.concat(data.blogs)
+            this.totalCount = data.count
+            if (data.blogs.length <= this.size) this.page++
           })
       },
       changePage() {
