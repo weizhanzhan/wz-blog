@@ -273,3 +273,54 @@ body,html{
 .comment-item:last-child .item-info{
     border-bottom:none
 }
+
+
+/** navigatior*/
+
+.wx_navigation > h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #333;
+    white-space: nowrap;
+    padding: 4px 0 4px 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    position: relative;
+}
+
+.wx_navigation > h1::before,h2::before,h3::before,h4::before,h5::before,h6::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -2px;
+    width: 4px;
+    height: 4px;
+    background-color: currentColor;
+    border-radius: 50%;
+}
+
+.wx_navigation > h1{
+    font-weight: 600;
+    color: #000;
+    
+}
+.wx_navigation > h2{  
+    padding-left: 30px;
+}
+.wx_navigation > h3{
+    padding-left: 50px;
+}
+.wx_navigation > h4{
+    padding-left: 70px;
+}
+.wx_navigation > h5{
+    padding-left: 90px;
+}
+.wx_navigation > h6{
+    padding-left: 110px;
+}

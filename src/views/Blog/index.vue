@@ -12,21 +12,25 @@
               > <i class="iconfont icon-back6" />{{ blog.title }}</a>
             </div>
             <mavon-editor
-              ref="test"
+              ref="mavon"
               v-model="blog.content"
-              :toolbars-flag="true"
+              :toolbars-flag="false"
               :ishljs="true"
-              :subfield="true"
+              :subfield="false"
               default-open="preview"
               :navigation="true"
-              @click.native="test"
+              @click.native="buildNavigation"
             />
           </div>
         </div>
-        <Aside :no-header-top="noHeaderTop" />
+        <Aside :no-header-top="noHeaderTop">
+          <div
+            id="navigation"
+            class="wx_navigation"
+          />
+        </Aside>
       </div>
     </div>
-    <div id="test" />
   </div>
 </template>
 
@@ -66,27 +70,26 @@
           clearTimeout(this.noTopTimer)
         }, 100)
       }
-      console.log(123)
-      this.$nextTick(() => {
-        console.log(this.$refs.test)
-      })
     },
     methods: {
       init() {
         // this.vloading = true
         getDetail(this.$route.params.id)
           .then(res => {
-            console.log(res)
             this.blog = res.data
+            this.$nextTick(() => {
+              this.buildNavigation()
+            })
           })
       },
       changePage() {
         this.init()
       },
-      test(e) {
-        console.log(this.$refs.test.$refs.navigationContent, this.$refs.test.d_render)
-        var a = document.getElementById('test')
-        a.innerHTML = this.$refs.test.d_render
+      buildNavigation() {
+        // console.log(123)
+        // console.log(this.$refs.mavon.d_render)
+        var a = document.getElementById('navigation')
+        a.innerHTML = this.$refs.mavon.d_render // mavmon根据marodown内容生成的dom
 
         const nodes = a.children
         if (nodes.length) {
@@ -99,9 +102,9 @@
           if (!reg.exec(node.tagName)) {
             node.style.display = 'none'
           } else {
+            console.log(node)
             node.onclick = function() {
-              console.log(this.children[0].id)
-              window.location.href = '#' + this.children[0].id
+              window.location.replace('#' + this.children[0].id)
               // const vShowContent = $vm.$refs.vShowContent
               // const vNoteEdit = $vm.$refs.vNoteEdit
               // if ($vm.s_subfield) {
@@ -124,6 +127,7 @@
             }
           }
         }
+        console.log(nodes)
       }
     }
   }

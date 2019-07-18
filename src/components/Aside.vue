@@ -7,9 +7,13 @@
       <div class="aside-item">
         <Account />
       </div>
-      <div class="aside-item noback">
-        <Eyes />
+      <div class="aside-item">
+        <!-- <Account /> -->
+        <slot />
       </div>
+      <!-- <div class="aside-item noback">
+        <Eyes />
+      </div> -->
     </div>
   </div>
 </template>
