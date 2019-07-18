@@ -1,57 +1,65 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-body,html{
+
+body,
+html {
     padding: 0;
     margin: 0;
     font-family: 'Poppins', sans-serif;
-  }
-.cursor{
+}
+
+.cursor {
     cursor: pointer;
 }
-.all-container{
+
+.all-container {
     background: #f4f5f5;
     padding-bottom: 30px;
     min-height: calc(100vh - 30px)
 }
-.blog-wrapper{
+
+.blog-wrapper {
     position: relative;
     margin: 0 auto;
     width: 100%;
     max-width: 960px;
 }
-.blog-container{
-   position: relative;
-   margin: 0 auto;
-   width: 100%;
-   max-width: 960px;
-   display: flex
+
+.blog-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 960px;
+    display: flex
 }
 
 /* Style the links inside the navigation bar */
-.blog-topnav-wrapper{
+.blog-topnav-wrapper {
 
     position: relative;
     height: 5rem;
     z-index: 1501;
 }
-.main-header{
+
+.main-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     transition: all .2s;
     background: #fff;
-  
+
     color: #909090;
     height: 61px;
     z-index: 250;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(26,26,26,.1)
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1)
 }
-.no-header{
+
+.no-header {
     height: 0px;
 }
 
-.blog-content{
+.blog-content {
     width: 800px;
     margin: auto;
     background: #ffffff;
@@ -59,47 +67,53 @@ body,html{
     margin-top: 10px;
     box-shadow: 0 2px 8px #d8d8d8;
 }
-.blog-content-title{
+
+.blog-content-title {
     font-size: 18px;
     color: #1890ff;
     padding-top: 5px;
     padding-left: 20px;
     position: relative;
-   
+
 }
-.blog-content-title::before{
+
+.blog-content-title::before {
     content: '';
-    width:4px;
+    width: 4px;
     height: 100%;
-    background:#1890ff;
+    background: #1890ff;
     position: absolute;
     top: 0;
     left: 0;
-  
+
 }
 
-.blog-list{
+.blog-list {
     flex: 1 1 auto;
     width: 700px;
 
 }
-.blog-list-container{
+
+.blog-list-container {
     background: #ffffff;
     min-height: 700px;
-    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
 }
-.blog-comment-container{
+
+.blog-comment-container {
     background: #ffffff;
 }
-.blog-list-container .list-header{
+
+.blog-list-container .list-header {
     font-size: 15px;
     height: 58px;
     /* padding: 10px 0 10px 24px; */
     position: relative;
     display: flex;
-    border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+    border-bottom: 1px solid hsla(0, 0%, 59.2%, .1);
 }
-.link-tab{
+
+.link-tab {
     align-items: center;
     -webkit-box-align: center;
     display: -webkit-box;
@@ -109,44 +123,53 @@ body,html{
     margin: 0 22px;
     cursor: pointer;
 }
-.link-tab.active{
+
+.link-tab.active {
     color: #0084ff;
     font-weight: 500;
 
 }
-.link-tab.title{
+
+.link-tab.title {
     font-size: 20px;
     font-weight: bold
 }
-.list-wrapper{
+
+.list-wrapper {
     list-style: none;
     padding: 0;
     margin: 0
 }
-.list-wrapper .list-item{
-    border-bottom: 1px solid rgba(178,186,194,.15);
+
+.list-wrapper .list-item {
+    border-bottom: 1px solid rgba(178, 186, 194, .15);
 
 }
-.list-wrapper .list-item:hover{
+
+.list-wrapper .list-item:hover {
     background: #FCFCFC
 }
-.list-item .blog-box{
+
+.list-item .blog-box {
     display: flex;
     align-items: center;
     padding: 18px 24px;
 }
-.list-item .blog-box .info-box{
+
+.list-item .blog-box .info-box {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-width: 0;
 }
-.info-box .info-row-meta{
+
+.info-box .info-row-meta {
     font-size: 12px;
     color: #b2bac2;
 }
-.info-box .info-row-title{
+
+.info-box .info-row-title {
     margin: 8px 0 16px;
     white-space: nowrap;
     overflow: hidden;
@@ -156,128 +179,165 @@ body,html{
     line-height: 1.2;
     color: #2e3135;
 }
-.info-box .info-row-title:hover{
+
+.info-box .info-row-title:hover {
     cursor: pointer;
-    text-decoration:underline
+    text-decoration: underline
 }
-.info-box .info-row-action{
+
+.info-box .info-row-action {
     font-size: 12px
 }
-.info-box .info-row-action span{
-    padding-right:14px;
+
+.info-box .info-row-action span {
+    padding-right: 14px;
     color: #b2bac2;
 }
-.list-item .blog-box .img-box{
+
+.list-item .blog-box .img-box {
     flex: 0 0 auto;
     width: 5rem;
     height: 5rem;
     margin-left: 2rem;
     border-radius: 2px;
 }
-.list-item .blog-box .img-box img{
+
+.list-item .blog-box .img-box img {
     width: 100%;
     height: 100%;
 }
 
-.blog-aside{
+.blog-aside {
     flex: 0 0 auto;
     width: 280px;
     margin-left: 20px
 }
-.aside-list{
+
+.aside-list {
     position: fixed;
     width: 280px;
     top: 80px;
     transition: all 0.2s
 }
-.aside-item{
-    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+
+.aside-item {
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
     background: #ffffff;
     margin-bottom: 30px
 }
-.aside-item.noback{
-    background: unset;
-    box-shadow:none;
-    text-align: center
+
+.aside-item.noback {
+    background: none;
+    box-shadow: none;
+
 }
-.comment-item{
+
+.comment-item {
     display: flex
 }
-.comment-item .item-avatar{
+
+.comment-item .item-avatar {
     flex: 0 0 auto;
 }
-.comment-item .item-info{
+
+.comment-item .item-info {
     margin-left: .833rem;
     flex: 1 1 auto;
 }
 
-.comment-title{
+.comment-title {
     text-align: center;
     color: #8a9aa9;
     font-size: 16px;
     font-weight: 400;
-    padding: 20px 
+    padding: 20px
 }
-.comment-form{
+
+.comment-form {
     display: flex;
-    padding:10px 5px;
+    padding: 10px 5px;
     width: 90%;
     margin: 0 auto;
     background: #fafbfc
 }
-.form-avatar{
+
+.form-avatar {
     flex: 0 0 60px;
     width: 60px;
 }
-.avatar-box{
+
+.avatar-box {
     margin: auto;
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background:url('https://user-gold-cdn.xitu.io/2018/12/24/167ddbb478b0a47f?imageView2/1/w/180/h/180/q/85/format/webp/interlace/1');
+    background: url('https://user-gold-cdn.xitu.io/2018/12/24/167ddbb478b0a47f?imageView2/1/w/180/h/180/q/85/format/webp/interlace/1');
     background-size: 100% 100%
 }
-.form-input{
+
+.form-input {
     flex: 1;
 }
-.form-input input{
+
+.form-input input {
     width: 90%;
     height: 30px;
     line-height: 30px;
     border: 1px solid #f1f1f1;
     border-radius: 3px;
     padding: 0 10px;
-    outline:none
+    outline: none
 }
-.comment-list{
+
+.comment-list {
     margin: 10px 40px 0 80px
 }
-.item-info{
-  padding-bottom: 10px;
-  margin-bottom: 5px;
-  border-bottom: 1px solid #f1f1f1;
+
+.item-info {
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #f1f1f1;
 }
-.item-info-name{
+
+.item-info-name {
     color: #333;
     display: inline;
     font-size: 14px;
     line-height: 1.2
 }
-.item-info-name a{
+
+.item-info-name a {
     font-weight: bold;
 }
-.item-info-text{
+
+.item-info-text {
     color: #505050;
     font-size: 14px;
 }
-.comment-item:last-child .item-info{
-    border-bottom:none
+
+.comment-item:last-child .item-info {
+    border-bottom: none
 }
 
 
 /** navigatior*/
+.wx_navigation {
+    position: relative;
+}
 
-.wx_navigation > h1,h2,h3,h4,h5,h6{
+.wx_navigation::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 13px;
+    bottom: 0;
+    width: 2px;
+    background-color: #ebedef;
+    opacity: .5;
+}
+
+.wx_navigation>.navigator-item {
+    cursor: pointer;
     margin: 0;
     padding: 0;
     font-size: 16px;
@@ -292,7 +352,17 @@ body,html{
     position: relative;
 }
 
-.wx_navigation > h1::before,h2::before,h3::before,h4::before,h5::before,h6::before{
+.wx_navigation>.navigator-item>a {
+    padding-left: 10px;
+    position: relative;
+}
+
+/* .wx_navigation>h1::before,
+.wx_navigation>h2::before,
+.wx_navigation>h3::before,
+.wx_navigation>h4::before, 
+.wx_navigation>h5::before,*/
+.wx_navigation>.navigator-item>a::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -304,23 +374,27 @@ body,html{
     border-radius: 50%;
 }
 
-.wx_navigation > h1{
+.navigator-item.H1 {
     font-weight: 600;
     color: #000;
-    
 }
-.wx_navigation > h2{  
+
+.navigator-item.H2 {
     padding-left: 30px;
 }
-.wx_navigation > h3{
+
+.navigator-item.H3 {
     padding-left: 50px;
 }
-.wx_navigation > h4{
+
+.navigator-item.H4 {
     padding-left: 70px;
 }
-.wx_navigation > h5{
+
+.navigator-item.H5 {
     padding-left: 90px;
 }
-.wx_navigation > h6{
+
+.navigator-item.H6 {
     padding-left: 110px;
 }

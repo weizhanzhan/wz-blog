@@ -18,7 +18,7 @@
               :ishljs="true"
               :subfield="false"
               default-open="preview"
-              :navigation="true"
+              :navigation="false"
               @click.native="buildNavigation"
             />
           </div>
@@ -86,12 +86,12 @@
         this.init()
       },
       buildNavigation() {
-        // console.log(123)
-        // console.log(this.$refs.mavon.d_render)
         var a = document.getElementById('navigation')
         a.innerHTML = this.$refs.mavon.d_render // mavmon根据marodown内容生成的dom
 
         const nodes = a.children
+        var newDoms = []
+
         if (nodes.length) {
           for (let i = 0; i < nodes.length; i++) {
             judageH(nodes[i], i, nodes)
@@ -102,32 +102,39 @@
           if (!reg.exec(node.tagName)) {
             node.style.display = 'none'
           } else {
-            console.log(node)
+            node.classList.add('navigator-item')
+            node.classList.add(node.tagName)
+            const nodeArr = node.innerHTML.split('</a>')
+            const id = nodeArr[0].replace(/[^0-9]+/g, '')
+            const content = nodeArr[1]
+            var childs = node.childNodes
+            for (var index = childs.length - 1; index >= 0; index--) {
+              node.removeChild(childs[index])
+            }
+
+            const a = document.createElement('a')
+            a.id = '_' + id
+            a.innerHTML = content
+            node.appendChild(a)
+            // console.log(id, content, node.tagName)
             node.onclick = function() {
               window.location.replace('#' + this.children[0].id)
-              // const vShowContent = $vm.$refs.vShowContent
-              // const vNoteEdit = $vm.$refs.vNoteEdit
-              // if ($vm.s_subfield) {
-              //   // 双栏
-              //   if ($vm.s_preview_switch) {
-              //     // 编辑预览
-              //     vNoteEdit.scrollTop = vShowContent.children[i].offsetTop * (vNoteEdit.scrollHeight - vNoteEdit.offsetHeight) / (vShowContent.scrollHeight - vShowContent.offsetHeight)
-              //   } else {
-              //     // todo 编辑
-              //   }
-              // } else {
-              //   // 单栏
-              //   if ($vm.s_preview_switch) {
-              //     // 预览
-              //     vShowContent.scrollTop = vShowContent.children[i].offsetTop
-              //   } else {
-              //     // todo 编辑
-              //   }
-              // }
             }
+            newDoms.push(node)
           }
         }
-        console.log(nodes)
+        const sliceDom = []
+        newDoms.forEach(dom => {
+          if (dom.tagName === 'H1') {
+            sliceDom.push([dom])
+          } else {
+            sliceDom[sliceDom.length - 1].push(dom)
+          }
+        })
+        console.log(sliceDom)
+        // function handleNewDom() {
+
+        // }
       }
     }
   }

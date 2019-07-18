@@ -7,7 +7,7 @@
       <div class="aside-item">
         <Account />
       </div>
-      <div class="aside-item">
+      <div class="aside-item noback">
         <!-- <Account /> -->
         <slot />
       </div>
