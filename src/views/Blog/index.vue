@@ -58,6 +58,10 @@
       }
     },
     mounted() {
+      // this.$nextTick(function() {
+      //   window.addEventListener('scroll', this.onScroll)
+      // })
+
       window.scrollTo(0, 0)
       window.onscroll = () => {
         // 变量t是滚动条滚动时，距离顶部的距离
@@ -72,6 +76,18 @@
       }
     },
     methods: {
+      onScroll() {
+        const scrolled = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
+        // 586、1063分别为第二个和第三个锚点对应的距离
+        console.log(scrolled)
+        // if (scrolled >= 1063) {
+        //   this.steps.active = 2
+        // } else if (scrolled < 1063 && scrolled >= 586) {
+        //   this.steps.active = 1
+        // } else {
+        //   this.steps.active = 0
+        // }
+      },
       init() {
         // this.vloading = true
         getDetail(this.$route.params.id)
@@ -103,10 +119,11 @@
             node.style.display = 'none'
           } else {
             node.classList.add('navigator-item')
-            node.classList.add(node.tagName)
+
             const nodeArr = node.innerHTML.split('</a>')
             const id = nodeArr[0].replace(/[^0-9]+/g, '')
             const content = nodeArr[1]
+
             var childs = node.childNodes
             for (var index = childs.length - 1; index >= 0; index--) {
               node.removeChild(childs[index])
@@ -123,18 +140,33 @@
             newDoms.push(node)
           }
         }
-        const sliceDom = []
-        newDoms.forEach(dom => {
-          if (dom.tagName === 'H1') {
-            sliceDom.push([dom])
+        const sliceDoms = [] // 归类好的节点树
+
+        newDoms.forEach((dom, i) => { // 把标题归类 每部分的标题组合到一起
+          const level = dom.tagName.substr(1)
+          const upLevel = newDoms[i - 1] ? newDoms[i - 1].tagName.substr(1) : ''
+
+          if (upLevel) {
+            if (level > upLevel) {
+              sliceDoms[sliceDoms.length - 1].push(dom)
+            } else if (level > sliceDoms[sliceDoms.length - 1][0].tagName.substr(1)) {
+              sliceDoms[sliceDoms.length - 1].push(dom)
+            } else {
+              sliceDoms.push([dom])
+            }
           } else {
-            sliceDom[sliceDom.length - 1].push(dom)
+            sliceDoms.push([dom])
           }
         })
-        console.log(sliceDom)
-        // function handleNewDom() {
-
-        // }
+        sliceDoms.forEach(doms => {
+          const thisTitleMaxId = doms[0].tagName.substr(1)
+          doms.forEach(dom => {
+            const domHeadingLevel = dom.tagName.substr(1) - thisTitleMaxId + 1
+            dom.classList.add('heading_' + domHeadingLevel)
+            console.log(domHeadingLevel)
+          })
+        })
+        console.log(sliceDoms)
       }
     }
   }
