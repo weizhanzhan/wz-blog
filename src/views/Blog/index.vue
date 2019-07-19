@@ -5,7 +5,7 @@
       <div class="blog-container">
         <div class="blog-list">
           <div class="blog-list-container">
-            <div class="list-header">
+            <div class="list-header detail">
               <a
                 class="link-tab title"
                 @click="$router.back()"
@@ -24,6 +24,12 @@
           </div>
         </div>
         <Aside :no-header-top="noHeaderTop">
+          <div class="wx_navigation">
+            <div class="navigator-item">
+              目录
+            </div>
+          </div>
+
           <div
             id="navigation"
             class="wx_navigation"
@@ -50,18 +56,8 @@
         blog: {}
       }
     },
-    computed: {
-      filterBlog() {
-        return this.blogs.filter(blog => {
-          return blog.title.match(this.searchBlog)
-        })
-      }
-    },
-    mounted() {
-      // this.$nextTick(function() {
-      //   window.addEventListener('scroll', this.onScroll)
-      // })
 
+    mounted() {
       window.scrollTo(0, 0)
       window.onscroll = () => {
         // 变量t是滚动条滚动时，距离顶部的距离
@@ -76,18 +72,6 @@
       }
     },
     methods: {
-      onScroll() {
-        const scrolled = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
-        // 586、1063分别为第二个和第三个锚点对应的距离
-        console.log(scrolled)
-        // if (scrolled >= 1063) {
-        //   this.steps.active = 2
-        // } else if (scrolled < 1063 && scrolled >= 586) {
-        //   this.steps.active = 1
-        // } else {
-        //   this.steps.active = 0
-        // }
-      },
       init() {
         // this.vloading = true
         getDetail(this.$route.params.id)

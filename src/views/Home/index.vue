@@ -5,52 +5,18 @@
       <div class="blog-container">
         <div class="blog-list">
           <div class="blog-list-container">
-            <div class="list-header">
-              <a class="link-tab active">全部</a>
-              <a class="link-tab">杂谈</a>
-              <a class="link-tab">计划</a>
-            </div>
-            <ul
+            <Title />
+            <List
               v-loading="vloading"
-              class="list-wrapper"
-            >
-              <li
-                v-for="(blog,index) in filterBlog"
-                :key="index"
-                class="list-item"
-              >
-                <div class="blog-box">
-                  <div class="info-box">
-                    <div class="info-row-meta">
-                      {{ blog.author }} · {{ blog.classify }} · {{ blog.date }}
-                    </div>
-                    <div
-                      class="info-row-title"
-                      @click="check(blog)"
-                    >
-                      {{ blog.title }}
-                    </div>
-                    <div class="info-row-action">
-                      <span>
-                        <i class="iconfont icon-icon-test" /> {{ blog.likes }}</span>
-                      <span><i class="iconfont icon-pinglun2" /> {{ blog.comment.length }}</span>
-                      <span><i class="iconfont icon-fenxiang" /></span>
-                    </div>
-                  </div>
-                  <div class="img-box">
-                    <img
-                      :src="blog.img"
-                      width="20"
-                      alt=""
-                    >
-                  </div>
-                </div>
-              </li>
-            </ul>
+              :data="blogs"
+            />
           </div>
           <NoMessage v-if="blogCounts==0" />
         </div>
-        <Aside :no-header-top="noHeaderTop" />
+        <Aside
+          :no-header-top="noHeaderTop"
+          :hot="blogs.slice(0,6)"
+        />
       </div>
     </div>
   </div>
@@ -60,28 +26,21 @@
   import Aside from '../../components/Aside'
   import initial from '../../mixins'
   import Header from '../../components/Header'
+  import Title from './modules/Title.vue'
+  import List from './modules/List'
   import NoMessage from '../../components/NoMessage'
   import { getScrollTop, getScrollHeight, getWindowHeight } from '../../utils/common'
   import { getBlogs } from '../../apis'
   export default {
     name: 'Home',
-    components: { Header, Aside, NoMessage },
-    // inject:['app'],
+    components: { Header, Aside, NoMessage, Title, List },
     mixins: [initial],
     data() {
       return {
         count: 1,
         blogs: [],
         blogCounts: 0,
-        searchBlog: '',
         timer: null
-      }
-    },
-    computed: {
-      filterBlog() {
-        return this.blogs.filter(blog => {
-          return blog.title.match(this.searchBlog)
-        })
       }
     },
     activated() {
@@ -102,12 +61,6 @@
             this.totalCount = data.count
             if (data.blogs.length <= this.size) this.page++
           })
-      },
-      changePage() {
-        this.init()
-      },
-      check(blog) {
-        this.$router.push({ path: '/blog/' + blog._id })
       },
       listenerScroll() {
         window.onscroll = () => {

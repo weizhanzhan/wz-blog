@@ -1,7 +1,7 @@
 <template>
   <div class="account">
     <div class="about">
-      About Me
+      关于我
     </div>
     <div class="info">
       <div>
@@ -41,6 +41,8 @@
 }
 .about {
   padding: 10px;
+  font-size: 15px;
+  font-weight: bold;
   border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
 }
 .info {

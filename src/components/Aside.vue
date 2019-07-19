@@ -4,6 +4,12 @@
       class="aside-list"
       :style="[noHeaderTop]"
     >
+      <div
+        v-if="hot.length"
+        class="aside-item"
+      >
+        <Hot :data="hot" />
+      </div>
       <div class="aside-item">
         <Account />
       </div>
@@ -11,23 +17,24 @@
         <!-- <Account /> -->
         <slot />
       </div>
-      <!-- <div class="aside-item noback">
-        <Eyes />
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
   import Account from './Account'
-  import Eyes from './Eyes'
+  import Hot from './Hot'
   export default {
     components: {
-      Account, Eyes
+      Account, Hot
 
     },
     props: {
-      noHeaderTop: Object
+      noHeaderTop: Object,
+      hot: {
+        type: Array,
+        default: () => []
+      }
     }
   }
 </script>
