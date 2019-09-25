@@ -94,18 +94,20 @@
 
         if (nodes.length) {
           for (let i = 0; i < nodes.length; i++) {
-            judageH(nodes[i], i, nodes)
+            const id = (nodes[i].children && nodes[i].children.length) ? nodes[i].children[0].id : ''
+            judageH(nodes[i], i, nodes, id)
           }
         }
-        function judageH(node, i, nodes) {
+        function judageH(node, i, nodes, domId) {
           const reg = /^H[1-6]{1}$/
-          if (!reg.exec(node.tagName)) {
+          if (!reg.exec(node.tagName)) { // 把不是h标签的都过滤掉
             node.style.display = 'none'
           } else {
             node.classList.add('navigator-item')
-
             const nodeArr = node.innerHTML.split('</a>')
-            const id = nodeArr[0].replace(/[^0-9]+/g, '')
+
+            // const id = nodeArr[0].replace(/[^0-9]+/g, '')
+            const id = domId
             const content = nodeArr[1]
 
             var childs = node.childNodes
@@ -114,7 +116,8 @@
             }
 
             const a = document.createElement('a')
-            a.id = '_' + id
+
+            a.id = id
             a.innerHTML = content
             node.appendChild(a)
             // console.log(id, content, node.tagName)
@@ -147,10 +150,8 @@
           doms.forEach(dom => {
             const domHeadingLevel = dom.tagName.substr(1) - thisTitleMaxId + 1
             dom.classList.add('heading_' + domHeadingLevel)
-            console.log(domHeadingLevel)
           })
         })
-        console.log(sliceDoms)
       }
     }
   }
